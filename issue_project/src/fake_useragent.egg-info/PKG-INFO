@@ -1,0 +1,98 @@
+Metadata-Version: 2.4
+Name: fake-useragent
+Version: 2.2.0
+Summary: Up-to-date simple useragent faker with real world database
+Author-email: Melroy van den Berg <melroy@melroy.org>, Victor Kovtun <hellysmile@gmail.com>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/fake-useragent/fake-useragent
+Keywords: agent,fake,fake user agent,fake useragent,user,user agent,useragent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: importlib-resources>=6; python_version < "3.10"
+
+# Issue #446 最小复现项目
+
+这是一个用于复现 fake-useragent issue #446 的最小项目。
+
+## Issue信息
+
+- **Issue编号**: #446
+- **标题**: Error occurred during getting browser(s): shape, but was suppressed with fallback
+- **URL**: https://github.com/fake-useragent/fake-useragent/issues/446
+- **类型**: Bug-related / Functional bug
+- **状态**: Closed
+
+## Bug描述
+
+当使用`UserAgent`类并指定多个参数（browsers、os、min_version）时，会出现错误并回退到固定的fallback值，导致：
+1. 生成的user agent缺乏随机性，经常重复
+2. 控制台输出错误信息："Error occurred during getting browser(s): shape, but was suppressed with fallback"
+
+## 快速开始
+
+### 1. 安装依赖
+
+```bash
+pip install -e .
+```
+
+### 2. 运行复现脚本
+
+```bash
+python buggy_version.py
+```
+
+### 3. 观察问题
+
+运行脚本后你会看到：
+- 控制台打印错误信息："Error occurred during getting browser(s): shape, but was suppressed with fallback"
+- 生成的10个user agent中有大量重复
+- 主要是2-3个固定的fallback值在循环使用
+
+## 项目结构
+
+```
+issue_project/
+├── src/
+│   └── fake_useragent/     # fake-useragent 源代码
+│       ├── __init__.py
+│       ├── fake.py         # UserAgent 主类
+│       ├── utils.py        # 工具函数
+│       ├── errors.py       # 错误定义
+│       ├── log.py          # 日志模块
+│       └── data/           # 数据文件
+├── buggy_version.py        # Bug复现脚本
+├── BUG_DESCRIPTION.md      # 详细的Bug描述
+├── pyproject.toml          # 项目配置
+└── README.md               # 本文件
+```
+
+## 技术细节
+
+问题的根本原因在于当使用多个过滤条件（browsers, os, min_version）时，可用的user agent数据集可能为空或过小，导致：
+- numpy的`random.choice`调用失败（因为数组为空）
+- 代码捕获异常并回退到固定的fallback值
+- 每次调用都可能触发相同的错误路径
+
+## 相关文件
+
+核心代码位于：
+- `src/fake_useragent/fake.py` - UserAgent类实现
+- `src/fake_useragent/utils.py` - 数据加载和过滤逻辑
