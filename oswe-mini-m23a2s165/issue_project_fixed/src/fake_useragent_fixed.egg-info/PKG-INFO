@@ -1,0 +1,4 @@
+Metadata-Version: 2.4
+Name: fake-useragent-fixed
+Version: 0.0.1
+Summary: Fixed variant of fake-useragent for Issue #446 (test exercise)

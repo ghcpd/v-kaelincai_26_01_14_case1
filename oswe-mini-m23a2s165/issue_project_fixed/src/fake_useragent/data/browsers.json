@@ -1,0 +1,50 @@
+[
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
+    "percent": 0.06,
+    "type": "desktop",
+    "device_brand": null,
+    "browser": "Chrome",
+    "browser_version": "137.0.0.0",
+    "browser_version_major_minor": 137.0,
+    "os": "Windows",
+    "os_version": "10",
+    "platform": "Win32"
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/137.0.0.0 Safari/537.36",
+    "percent": 0.05,
+    "type": "desktop",
+    "device_brand": null,
+    "browser": "Chrome",
+    "browser_version": "137.0.0.0",
+    "browser_version_major_minor": 137.0,
+    "os": "Windows",
+    "os_version": "10",
+    "platform": "Win32"
+  },
+  {
+    "useragent": "Mozilla/5.0 (X11; CrOS x86_64) Chrome/135.0.0.0 Safari/537.36",
+    "percent": 0.04,
+    "type": "desktop",
+    "device_brand": null,
+    "browser": "Chrome",
+    "browser_version": "135.0.0.0",
+    "browser_version_major_minor": 135.0,
+    "os": "Chrome OS",
+    "os_version": "14541.0.0",
+    "platform": "Linux x86_64"
+  },
+  {
+    "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0",
+    "percent": 0.03,
+    "type": "desktop",
+    "device_brand": null,
+    "browser": "Firefox",
+    "browser_version": "139.0",
+    "browser_version_major_minor": 139.0,
+    "os": "Windows",
+    "os_version": "10",
+    "platform": "Win32"
+  }
+]
