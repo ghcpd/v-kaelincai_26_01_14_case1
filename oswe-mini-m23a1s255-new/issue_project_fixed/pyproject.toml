@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fake-useragent-fixed"
+version = "0.0.1"
+description = "Fixed fork of fake-useragent (fix for Issue #446: low randomness when filtering)."
+readme = "README.md"
+requires-python = ">=3.8"
+
+[tool.pytest]
+addopts = "-q"
