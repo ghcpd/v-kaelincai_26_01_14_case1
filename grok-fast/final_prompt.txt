@@ -1,0 +1,160 @@
+# Issue #446 Fix Task Prompt
+
+## Task Overview
+
+You need to fix Issue #446 in the fake-useragent library. The current project has a functional bug: when creating a UserAgent instance with specific parameters, the generated user agents lack randomness and show significant repetition.
+
+## Current Project Structure
+
+```
+issue_project/
+├── src/
+│   └── fake_useragent/
+│       ├── __init__.py
+│       ├── fake.py
+│       ├── utils.py
+│       ├── errors.py
+│       ├── log.py
+│       ├── get_version.py
+│       ├── py.typed
+│       └── data/
+│           └── browsers.json
+├── buggy_version.py
+└── pyproject.toml
+```
+
+## Bug Reproduction
+
+Run `buggy_version.py` to see the issue:
+
+```python
+ua = UserAgent(
+    browsers=["Chrome", "Firefox", "Edge", "Opera", "Safari", "Android",
+              "Samsung Internet", "Opera Mobile", "Mobile Safari", "Firefox Mobile",
+              "Chrome Mobile", "Chrome Mobile iOS", "Mobile Safari UI/WKWebView", "Edge Mobile"],
+    os=["Windows", "Chrome OS", "Mac OS X", "Android", "iOS"],
+    min_version=131,
+)
+
+# Generate 10 user agents, you'll notice about 20% repetition rate
+for i in range(10):
+    print(ua.random)
+```
+
+**Expected Behavior**: Each call should return a different, random user agent string
+**Actual Behavior**: Generated user agents show repetition, lacking sufficient randomness
+
+## Your Tasks
+
+### 1. Create Fixed Version Project
+
+Create the fixed project in the current working directory with the following structure:
+
+```
+issue_project_fixed/
+├── src/
+│   └── fake_useragent/
+│       ├── __init__.py
+│       ├── fake.py          # Fixed code
+│       ├── utils.py         # Fixed code (if needed)
+│       ├── errors.py
+│       ├── log.py
+│       ├── get_version.py
+│       ├── py.typed
+│       └── data/
+│           └── browsers.json
+├── tests/                    # pytest test files
+├── fixed_version.py          # Script demonstrating the fix
+├── pyproject.toml
+├── pytest.ini
+├── README.md                 # Project usage and quick start guide
+└── SOLUTION.md               # Explanation of fix, root cause, and test strategy
+```
+
+### 2. Code Fix Requirements
+
+- Identify the root cause of insufficient randomness in the fake.py file
+- Fix the issue by modifying the user agent selection logic
+- The problem involves duplicate entries in the filtered user agent list
+- Implement deduplication of user agents by their string value
+- Maintain backward compatibility with all existing APIs
+- Ensure no existing functionality is broken
+- Code must be clean, well-commented, and maintainable
+
+### 3. Testing Requirements
+
+Write comprehensive tests using pytest to ensure the bug is fixed without introducing new issues:
+
+- **Issue-specific tests**: Verify the fix for Issue #446 with the exact parameters mentioned above
+- **Functional tests**: Ensure basic UserAgent functionality works (random property, filtering, etc.)
+- **Edge case tests**: Test boundary conditions, empty results, invalid parameters, etc.
+- **Regression tests**: Ensure backward compatibility with existing code
+
+All tests must pass - running `pytest -v` should show 100% pass rate.
+
+### 4. Documentation Requirements
+
+**README.md** should include:
+- Clear project introduction and Issue #446 background
+- Quick start guide (installation, running, testing)
+- Usage examples with filters
+- Complete project structure explanation
+
+**SOLUTION.md** should include:
+
+1. **Problem Analysis**
+   - Root cause: Multiple duplicate user agent strings in the filtered data
+   - Why it happens: Same UA string appears hundreds of times with different metadata
+   - Impact: Biased random selection toward most common entries
+
+2. **Solution**
+   - Implement deduplication in the `_filter_useragents()` method or `getBrowser()` method
+   - Deduplicate by user agent string value to keep only unique UAs
+   - This eliminates the bias from duplicate entries
+
+3. **Testing Strategy**
+   - Unit tests for deduplication logic
+   - Integration tests with full UserAgent flow
+   - Specific tests for Issue #446 scenario
+   - Verification that randomness improves
+
+4. **Usage Instructions**
+   - Installation: `pip install -e .`
+   - Running tests: `pytest -v`
+   - Verification: Run `python fixed_version.py`
+
+### 5. Verification Requirements
+
+Before submitting, verify:
+
+- [ ] All pytest tests pass (`pytest -v` shows 100% pass rate)
+- [ ] `python fixed_version.py` demonstrates improved randomness
+- [ ] No new bugs introduced; all features still work
+- [ ] Backward compatibility maintained (no API changes)
+- [ ] README.md provides complete usage guide
+- [ ] SOLUTION.md fully documents the fix approach
+- [ ] Test coverage includes Issue #446 specific case
+- [ ] Edge cases are handled properly
+
+## Important Notes
+
+1. **Project Location**: Create all files in the current working directory (not C:\BugBash\workSpace2\)
+2. **No Absolute Paths**: All file references must use relative paths
+3. **Data Handling**: The `browsers.jsonl` data file should be copied from the original project
+4. **Configuration**: Ensure proper pyproject.toml and pytest.ini setup
+5. **Complete Solution**: SOLUTION.md must be detailed enough for other developers to understand the fix
+
+## Delivery Standards
+
+Upon completion, you should be able to:
+
+1. Navigate to `issue_project_fixed/` directory
+2. Run `pip install -e .` to install the fixed version
+3. Run `pytest -v` to see all tests pass (100% success rate)
+4. Run `python fixed_version.py` to verify the bug is fixed and randomness is improved
+5. Read `README.md` to understand the project and how to use it
+6. Read `SOLUTION.md` to understand the root cause and fix approach in detail
+
+The fix should significantly reduce repetition compared to the original code and provide consistent, random user agent selection across multiple calls with the same filter parameters.
+
+Let's start fixing Issue #446!
