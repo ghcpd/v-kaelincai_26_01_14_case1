@@ -1,0 +1,37 @@
+# fake-useragent (fixed) — Issue #446
+
+A small, focused fix for fake-useragent Issue #446 (insufficient randomness when
+creating UserAgent instances with restrictive filters). This repository contains
+a minimal, well-tested reproduction and a robust fix.
+
+Quick start
+-----------
+
+- Install (editable):
+
+  python -m pip install -e .
+
+- Run the demonstration script:
+
+  python fixed_version.py
+
+- Run the tests:
+
+  pytest -v
+
+What was wrong
+--------------
+When callers constructed a `UserAgent` with filters (browsers / min_version),
+some versions of the library returned the same user-agent repeatedly. The
+root cause was caching a single chosen UA for a filtered configuration rather
+than selecting a UA at each access.
+
+What this project provides
+--------------------------
+- A clear, small implementation that always selects a new UA on each access.
+- A fallback strategy when filters are overly restrictive.
+- Comprehensive, non-flaky pytest coverage that verifies the fix.
+
+License
+-------
+MIT-style (see project files).
