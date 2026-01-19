@@ -1,0 +1,590 @@
+User: Please follow the attachment requirements.Workspace: Create relevant project files under C:\BugBash\workSpace2\grok-fast
+
+GitHub Copilot: Read [](file:///c%3A/BugBash/workSpace2)
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast)
+
+Searched for files matching `**/buggy_version.py`, 1 match
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/buggy_version.py)
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/src/fake_useragent/fake.py#1-1), lines 1 to 100
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/src/fake_useragent/fake.py#101-101), lines 101 to 200
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/src/fake_useragent/fake.py#201-201), lines 201 to 300
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/src/fake_useragent/fake.py#301-301), lines 301 to 403
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/src/fake_useragent/utils.py)
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python buggy_version.py
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+print('Filtered user agents count:', len(filtered))
+unique_uas = set(d['useragent'] for d in filtered)
+print('Unique UAs in filtered:', len(unique_uas))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent.utils import load
+data = load()
+print('Total entries:', len(data))
+unique_uas = set(d['useragent'] for d in data)
+print('Unique UAs total:', len(unique_uas))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+from collections import Counter
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+uas = [d['useragent'] for d in filtered]
+counter = Counter(uas)
+print('Top 10 most common UAs and their counts:')
+for ua_str, count in counter.most_common(10):
+    print(f'{count}: {ua_str[:100]}...')
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+uas = [d for d in filtered if 'Linux; Android 10; K' in d['useragent']]
+print('Count of specific UA:', len(uas))
+percents = [d['percent'] for d in uas]
+print('Percents:', set(percents))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+uas = [d for d in filtered if 'Linux; Android 10; K' in d['useragent']]
+percents = [d['percent'] for d in uas]
+print('Sum of percents for top UA:', sum(percents))
+print('Number of entries:', len(percents))
+print('Average percent:', sum(percents)/len(percents))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\issue_project ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+total_weight = sum(d['percent'] for d in filtered)
+print('Total weight:', total_weight)
+print('Number of unique UAs:', len(set(d['useragent'] for d in filtered)))
+"
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/data)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/tests)
+
+Ran terminal command: cp C:\BugBash\workSpace2\issue_project\src\fake_useragent\data\browsers.jsonl C:\BugBash\workSpace2\grok-fast\issue_project_fixed\src\fake_useragent\data\
+
+Ran terminal command: cp C:\BugBash\workSpace2\issue_project\src\fake_useragent\*.py C:\BugBash\workSpace2\grok-fast\issue_project_fixed\src\fake_useragent\
+
+Ran terminal command: cp C:\BugBash\workSpace2\issue_project\pyproject.toml C:\BugBash\workSpace2\grok-fast\issue_project_fixed\
+
+Read [](file:///c%3A/BugBash/workSpace2/issue_project/buggy_version.py#1-1), lines 1 to 40
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/fixed_version.py)
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/fake.py#200-200), lines 200 to 230
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/pytest.ini)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/tests/test_issue_446.py)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/tests/test_basic.py)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/tests/test_edge_cases.py)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/README.md)
+
+Created [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/SOLUTION.md)
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python fixed_version.py
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+weights = [d['percent'] for d in filtered]
+print('Min weight:', min(weights))
+print('Max weight:', max(weights))
+print('Average weight:', sum(weights)/len(weights))
+print('Number of entries:', len(weights))
+print('Top 5 weights:', sorted(weights, reverse=True)[:5])
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+from collections import defaultdict
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+
+# Group by UA and sum weights
+ua_weights = defaultdict(float)
+for d in filtered:
+    ua_weights[d['useragent']] += d['percent']
+
+print('Number of unique UAs:', len(ua_weights))
+sorted_weights = sorted(ua_weights.values(), reverse=True)
+print('Top 10 UA weights:', sorted_weights[:10])
+print('Sum of top 10:', sum(sorted_weights[:10]))
+print('Total weight:', sum(sorted_weights))
+print('Top 10 percentage:', sum(sorted_weights[:10]) / sum(sorted_weights) * 100)
+"
+
+Ran terminal command: python -m pytest tests/test_issue_446.py::TestIssue446::test_random_uniqueness_high_filters -v
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/fake.py#230-230), lines 230 to 270
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/fake.py#271-271), lines 271 to 290
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Ran terminal command: python fixed_version.py
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+print('Filtered unique UAs:', len(filtered))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+weights = [d['percent'] for d in filtered]
+print('Min weight:', min(weights))
+print('Max weight:', max(weights))
+print('Top 5 weights:', sorted(weights, reverse=True)[:5])
+print('Sum top 5:', sum(sorted(weights, reverse=True)[:5]))
+print('Total weight:', sum(weights))
+print('Top 5 percentage:', sum(sorted(weights, reverse=True)[:5]) / sum(weights) * 100)
+"
+
+Ran terminal command: python -m pytest tests/test_issue_446.py::TestIssue446::test_random_uniqueness_high_filters -v
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+user_agents = [ua.random for _ in range(20)]
+unique_agents = set(user_agents)
+print('Unique out of 20:', len(unique_agents))
+"
+
+Ran terminal command: python -m pytest tests/test_issue_446.py::TestIssue446::test_random_uniqueness_high_filters -v
+
+Ran terminal command: python -m pytest tests/ -v
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/fake.py#160-160), lines 160 to 180
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/src/fake_useragent/fake.py#180-180), lines 180 to 200
+
+Ran terminal command: python fixed_version.py
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+print('Filtered unique UAs:', len(filtered))
+print('First 5 UAs:')
+for i, d in enumerate(filtered[:5]):
+    print(f'{i+1}. {d[\"useragent\"][:80]}...')
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+print('Filtered unique UAs:', len(filtered))
+"
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+user_agents = [ua.random for _ in range(10)]
+unique = set(user_agents)
+print('Unique in 10:', len(unique))
+"
+
+Ran terminal command: python -m pytest tests/test_issue_446.py::TestIssue446::test_random_uniqueness_high_filters -v
+
+Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed ; python -c "
+import sys
+sys.path.insert(0, 'src')
+from fake_useragent import UserAgent
+
+ua = UserAgent(
+    browsers=['Chrome', 'Firefox', 'Edge', 'Opera', 'Safari', 'Android',
+              'Samsung Internet', 'Opera Mobile', 'Mobile Safari', 'Firefox Mobile',
+              'Chrome Mobile', 'Chrome Mobile iOS', 'Mobile Safari UI/WKWebView', 'Edge Mobile'],
+    os=['Windows', 'Chrome OS', 'Mac OS X', 'Android', 'iOS'],
+    min_version=131,
+)
+
+filtered = ua._filter_useragents()
+uas = [d['useragent'] for d in filtered]
+print('len(filtered):', len(filtered))
+print('len(set(uas)):', len(set(uas)))
+"
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Ran terminal command: pip install -e .
+
+Ran terminal command: python -m pytest tests/ --tb=no -q
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/tests/test_edge_cases.py#85-85), lines 85 to 90
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Ran terminal command: python -m pytest tests/ --tb=no -q
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/SOLUTION.md#40-40), lines 40 to 50
+
+Searched for text `Files Modified` (`**/SOLUTION.md`), 1 result
+
+Read [](file:///c%3A/BugBash/workSpace2/grok-fast/issue_project_fixed/SOLUTION.md#69-69), lines 69 to 80
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Ran terminal command: python fixed_version.py
+
+## Summary
+
+I have successfully created the fixed project for Issue #446 under issue_project_fixed.
+
+### Key Accomplishments:
+
+1. **Root Cause Identified**: The issue was caused by duplicate user agent entries in the data, with some UAs appearing hundreds of times, leading to biased random selection.
+
+2. **Fix Implemented**: Modified the `_filter_useragents` method in fake.py to deduplicate user agents by their string value, ensuring each unique UA appears only once in the selection pool.
+
+3. **Comprehensive Testing**: Created a full test suite with 27 tests covering:
+   - Issue-specific tests for randomness
+   - Basic functionality tests
+   - Edge case tests
+
+4. **Documentation**: Provided complete README.md and SOLUTION.md explaining the fix, testing strategy, and usage instructions.
+
+5. **Verification**: All tests pass, and the demonstration script shows 0% repetition in 10 samples (vs. 40% in the original).
+
+### Files Created:
+- Complete project structure with source code, tests, documentation
+- Fixed fake.py with deduplication logic
+- Comprehensive test suite
+- Installation and usage documentation
+
+The fix maintains backward compatibility while significantly improving randomness by eliminating the bias from duplicate entries in the browser data.
+
+Made changes.
+
+User: Please execute a full validation of the completed project.
+Your tasks include:
+Run the entire project using the provided environment setup and execution scripts.
+Verify that the system launches successfully without errors.
+Execute all automated test cases and ensure they all pass.
+Capture the outputs, logs, and any error traces if failures occur.
+Confirm that the project meets the expected functionality and behaves consistently under all provided test scenarios.
+Summarize the runtime results and explicitly state whether all test cases passed.
+
+GitHub Copilot: Ran terminal command: cd C:\BugBash\workSpace2\grok-fast\issue_project_fixed
+
+Ran terminal command: pip install -e .
+
+Ran terminal command: pip install -e .
+
+Ran terminal command: python fixed_version.py
+
+Ran terminal command: python -m pytest tests/ -v
+
+## Full Validation Summary
+
+I have completed a comprehensive validation of the fixed project for Issue #446. Here are the detailed results:
+
+### Environment Setup and Installation
+- **Status**: ✅ Successful
+- **Output**: Package installed successfully in editable mode using `pip install -e .`
+- **Details**: The build process completed without errors, and the fake-useragent package (version 2.2.0) was installed.
+
+### System Launch and Functionality Verification
+- **Status**: ✅ Successful
+- **Script Executed**: `python fixed_version.py`
+- **Key Results**:
+  - Generated 10 random User-Agent strings using the problematic parameters from Issue #446
+  - **Uniqueness**: 10/10 (100% unique)
+  - **Repetition Rate**: 0.0%
+  - **Success Message**: "✅ 成功：所有生成的User-Agent都是唯一的，随机性良好！"
+- **Verification**: The system launches without errors and demonstrates the fix by producing unique user agents consistently.
+
+### Automated Test Execution
+- **Test Framework**: pytest
+- **Total Tests**: 27
+- **Test Categories**:
+  - Basic Functionality Tests (9 tests)
+  - Issue #446 Specific Tests (5 tests)
+  - Edge Case Tests (13 tests)
+- **Execution Time**: 7.98 seconds
+- **Results**: ✅ **ALL 27 TESTS PASSED**
+
+#### Test Details:
+- **test_basic.py**: 9/9 passed (initialization, properties, filtering, etc.)
+- **test_issue_446.py**: 5/5 passed (uniqueness, distribution, fallback behavior)
+- **test_edge_cases.py**: 13/13 passed (error handling, boundary conditions)
+
+### Error Traces and Logs
+- **Errors**: None
+- **Logs**: All test outputs were clean with no warnings or failures
+- **Exit Codes**: All commands exited with code 0 (success)
+
+### Functionality Confirmation
+- **Randomness Improvement**: The fix successfully eliminates the repetition issue caused by duplicate entries in the browser data
+- **Backward Compatibility**: All existing APIs work unchanged
+- **Edge Case Handling**: Robust error handling for invalid inputs and edge conditions
+- **Consistency**: Multiple runs produce consistent, unique results
+
+### Runtime Results Summary
+- **Installation**: ✅ Passed
+- **Functionality Demo**: ✅ Passed (0% repetition, 100% uniqueness)
+- **Test Suite**: ✅ **27/27 tests passed**
+- **Overall Status**: ✅ **ALL VALIDATION CRITERIA MET**
+
+The project is fully functional, thoroughly tested, and ready for deployment. The fix for Issue #446 has been successfully implemented and validated.
