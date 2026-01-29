@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fake-useragent-fixed"
+version = "2.2.0.post446"
+description = "Fixed demo for Issue #446 (fake-useragent)"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[tool.setuptools]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"fake_useragent.data" = ["*.jsonl"]
+"fake_useragent" = ["py.typed"]

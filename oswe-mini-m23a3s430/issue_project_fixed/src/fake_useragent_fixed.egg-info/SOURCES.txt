@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/fake_useragent/__init__.py
+src/fake_useragent/errors.py
+src/fake_useragent/fake.py
+src/fake_useragent/get_version.py
+src/fake_useragent/log.py
+src/fake_useragent/utils.py
+src/fake_useragent/data/browsers.jsonl
+src/fake_useragent_fixed.egg-info/PKG-INFO
+src/fake_useragent_fixed.egg-info/SOURCES.txt
+src/fake_useragent_fixed.egg-info/dependency_links.txt
+src/fake_useragent_fixed.egg-info/top_level.txt
+tests/test_issue_446.py
