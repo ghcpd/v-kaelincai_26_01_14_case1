@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fake-useragent-fixed"
+version = "0.0.1"
+description = "Fixed variant of fake-useragent for Issue #446 (test exercise)"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
